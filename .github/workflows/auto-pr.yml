@@ -1,0 +1,23 @@
+name: Auto PR from develop to main
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        base: main
+        branch: develop
+        title: 'Automatic PR from develop to main'
+        body: 'This pull request was automatically created from the develop branch.'
+        draft: false
