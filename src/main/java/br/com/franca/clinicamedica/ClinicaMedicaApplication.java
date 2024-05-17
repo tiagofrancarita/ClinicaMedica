@@ -1,4 +1,4 @@
-package br.com.franca.ClinicaMedica;
+package br.com.franca.clinicamedica;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
