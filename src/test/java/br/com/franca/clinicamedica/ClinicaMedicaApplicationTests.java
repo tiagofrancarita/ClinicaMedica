@@ -1,4 +1,4 @@
-package br.com.franca.ClinicaMedica;
+package br.com.franca.clinicamedica;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
