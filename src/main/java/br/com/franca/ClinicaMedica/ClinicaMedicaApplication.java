@@ -10,4 +10,6 @@ public class ClinicaMedicaApplication {
 		SpringApplication.run(ClinicaMedicaApplication.class, args);
 	}
 
+
+
 }
