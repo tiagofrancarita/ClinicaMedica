@@ -1,9 +1,9 @@
 package br.com.franca.clinicamedica.entities;
 
-import br.com.franca.clinicamedica.enums.CorRaca;
+import br.com.franca.clinicamedica.enums.CorRacaEnum;
 import br.com.franca.clinicamedica.enums.EstadoCivilEnum;
-import br.com.franca.clinicamedica.enums.FormaPagamento;
-import br.com.franca.clinicamedica.enums.Sexo;
+import br.com.franca.clinicamedica.enums.FormaPagamentoEnum;
+import br.com.franca.clinicamedica.enums.SexoEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,11 +26,11 @@ public class Paciente implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, unique = true, nullable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_paciente", updatable = false, unique = true, nullable = false)
+    private Long id;
 
-    @Column(name = "prontuario", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name = "numero_prontuario", nullable = false, columnDefinition = "VARCHAR(255)")
     private String numeroProntuario;
 
     @Column(name = "nome_completo", nullable = false, columnDefinition = "VARCHAR(255)")
@@ -88,18 +88,18 @@ public class Paciente implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estadoCivil", nullable = false, columnDefinition = "VARCHAR(255)")
-    private EstadoCivilEnum estadoCivil;
+    private EstadoCivilEnum estadoCivilEnum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "corRaca", nullable = false, columnDefinition = "VARCHAR(255)")
-    private CorRaca corRaca;
+    private CorRacaEnum corRacaEnum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sexo", nullable = false, columnDefinition = "VARCHAR(255)")
-    private Sexo sexo;
+    private SexoEnum sexoEnum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "formaPagamento", nullable = false, columnDefinition = "VARCHAR(255)")
-    private FormaPagamento formaPagamento;
+    private FormaPagamentoEnum formaPagamentoEnum;
 
 }
