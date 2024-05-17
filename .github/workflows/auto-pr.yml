@@ -2,8 +2,9 @@ name: Auto PR from develop to main
 
 on:
   push:
-    branches:
-      - develop
+    branches: [develop]
+  pull_request:
+    branches: [main]
 
 jobs:
   create_pull_request:
