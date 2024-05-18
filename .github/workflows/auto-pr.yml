@@ -31,7 +31,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: develop
-          pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
+          pr_title: "Pull request ${{ github.ref_name }} into ${{ env.DESTINATION_BRANCH }}"
           pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.COMMIT_MESSAGES }}"
           pr_label: "feature, automated pr"
         env:
