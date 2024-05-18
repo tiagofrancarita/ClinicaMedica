@@ -21,11 +21,17 @@ jobs:
           COMMIT_MESSAGES=$(git log --pretty=format:"%s" -10)
           echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
 
+      - name: Debug PR body
+        run: |
+          echo "PR_BODY:" 
+          cat $GITHUB_EVENT_PATH
+        if: always()
+
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: develop
-          pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
+          pr_title: "Pull request ${{ github.ref_name }} into ${{ env.DESTINATION_BRANCH }}"
           pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.COMMIT_MESSAGES }}"
           pr_label: "feature, automated pr"
         env:
