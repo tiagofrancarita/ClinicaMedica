@@ -1,5 +1,6 @@
 package br.com.franca.clinicamedica.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,8 +46,19 @@ public class Endereco implements Serializable {
     @Column(name = "cep", nullable = false, columnDefinition = "VARCHAR(255)")
     private String cep;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JsonIgnore
+    @ManyToOne(targetEntity = Paciente.class)
+    @JoinColumn(name = "id_paciente", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "paciente_id_fk"))
     private Paciente paciente;
+
+    @JsonIgnore
+    @ManyToOne(targetEntity = Medico.class)
+    @JoinColumn(name = "id_medico", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "medico_id_fk"))
+    private Medico medico;
+
+    @JsonIgnore
+    @ManyToOne(targetEntity = Medico.class)
+    @JoinColumn(name = "id_enfermeiro", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "enfermeiro_id_fk"))
+    private Enfermeiro enfermeiro;
 
 }
