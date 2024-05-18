@@ -13,6 +13,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Set destination branch
+        run: echo "DESTINATION_BRANCH=main" >> $GITHUB_ENV
+
       - name: Get commit messages
         run: |
           git fetch --depth=1 origin main
@@ -24,7 +27,7 @@ jobs:
         with:
           source_branch: "develop"
           destination_branch: "main"
-          pr_title: "Merge ${{ github.ref_name }} into main"
+          pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
           pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.commit-messages }}"
           pr_label: "feature, automated pr"
         env:
