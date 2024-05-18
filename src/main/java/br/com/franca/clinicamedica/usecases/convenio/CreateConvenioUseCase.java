@@ -6,6 +6,8 @@ import br.com.franca.clinicamedica.entities.TipoPlano;
 import br.com.franca.clinicamedica.gateways.ConvenioGateway;
 import br.com.franca.clinicamedica.repositories.ConvenioRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ public class CreateConvenioUseCase {
     private final ConvenioRepository convenioRepository;
     private final ModelMapper modelMapper;
 
+    private Logger log = LoggerFactory.getLogger(CreateConvenioUseCase.class);
+
     @Autowired
     public CreateConvenioUseCase(ConvenioGateway convenioGateway, ConvenioRepository convenioRepository, ModelMapper modelMapper) {
         this.convenioGateway = convenioGateway;
@@ -29,6 +33,8 @@ public class CreateConvenioUseCase {
 
 
     public ConvenioDTO createConvenio(ConvenioDTO convenioDTO) {
+
+        log.info("------------------ Iniciando o cadastro do convenio ------------------------------");
         Convenio convenio = modelMapper.map(convenioDTO, Convenio.class);
         validateConvenio(convenio);
         List<TipoPlano> tipoPlanos = convenio.getTipoPlano();
@@ -41,10 +47,15 @@ public class CreateConvenioUseCase {
 
     private void validateConvenio(Convenio convenio) {
 
+
+        log.info("------------------ Iniciando validação dos dados  ------------------------------");
+
         // Regra 1: Verificar se o nome do convênio já existe
         Optional<Convenio> existingConvenio = convenioRepository.findByNome(convenio.getNome());
         if (existingConvenio.isPresent()) {
+            log.error("------------------ Já existe um convênio com esse nome. ------------------------------");
             throw new IllegalArgumentException("Já existe um convênio com esse nome.");
+
         }
 
         // Regra 2: Validar se o convênio possui pelo menos um tipo de plano
