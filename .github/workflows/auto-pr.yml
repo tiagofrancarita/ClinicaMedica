@@ -8,7 +8,6 @@ on:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -17,7 +16,7 @@ jobs:
         run: echo "DESTINATION_BRANCH=develop" >> $GITHUB_ENV
 
       - name: Get commit messages
-        id: commit_messages
+        id: get-commit-messages
         run: |
           COMMIT_MESSAGES=$(git log --pretty=format:"%s" -10)
           echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
@@ -25,9 +24,9 @@ jobs:
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-            destination_branch: develop
-            pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
-            pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.commit-messages }}"
-            pr_label: "feature, automated pr"
-            env:
-              GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          destination_branch: develop
+          pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
+          pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.COMMIT_MESSAGES }}"
+          pr_label: "feature, automated pr"
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
