@@ -46,7 +46,7 @@ public class Consulta implements Serializable {
     private Paciente paciente;
 
     @OneToOne()
-    @JoinColumn(name = "id_especialidade", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "id_especialidade_fk"))
+    @JoinColumn(name = "id_especialidade", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "id_consulta_especialidade_fk"))
     private Especialidade especialidade;
 
 
