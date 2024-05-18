@@ -15,5 +15,6 @@ jobs:
         with:
           destination_branch: "develop"
           token: ${{ secrets.PERSONAL_TOKEN }}
-          pr_label: "PR Featture to DEV"
-          pr_title: "PR Featture to DEV"
+          pr_title: "Merge ${{ github.ref_name }} into develop"
+          pr_body: "This is an automated pull request from ${{ github.ref_name }} to develop."
+          pr_label: "feature, automated pr"
