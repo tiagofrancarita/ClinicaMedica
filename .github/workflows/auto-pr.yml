@@ -15,5 +15,5 @@ jobs:
         with:
           destination_branch: "develop"
           token: ${{ secrets.PERSONAL_TOKEN }}
-          pr_label: "feature, automated pr"
-          pr_title: "[Example] Simple demo"
+          pr_label: "PR Featture to DEV"
+          pr_title: "PR Featture to DEV"
