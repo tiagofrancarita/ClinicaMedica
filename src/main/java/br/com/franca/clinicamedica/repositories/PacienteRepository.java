@@ -1,0 +1,10 @@
+package br.com.franca.clinicamedica.repositories;
+
+import br.com.franca.clinicamedica.entities.Paciente;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PacienteRepository extends JpaRepository<Paciente, Long> {
+
+    boolean existsByConvenioId(Long convenioId);
+
+}

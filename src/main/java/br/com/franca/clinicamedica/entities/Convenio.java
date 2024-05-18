@@ -21,7 +21,7 @@ public class Convenio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_prontuario", updatable = false, unique = true, nullable = false)
+    @Column(name = "id_convenio", updatable = false, unique = true, nullable = false)
     private Long id;
 
     @Column(name = "nome", nullable = false, columnDefinition = "VARCHAR(255)")
@@ -29,7 +29,6 @@ public class Convenio implements Serializable {
 
     @OneToMany(mappedBy = "convenio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TipoPlano> tipoPlano;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_conveio>", nullable = false, columnDefinition = "VARCHAR(255)")
