@@ -60,31 +60,39 @@ public class CreateConvenioUseCase {
 
         // Regra 2: Validar se o convênio possui pelo menos um tipo de plano
         if (convenio.getTipoPlano() == null || convenio.getTipoPlano().isEmpty()) {
+            log.error("------------------ O convênio deve ter pelo menos um tipo de plano. ------------------------------");
             throw new IllegalArgumentException("O convênio deve ter pelo menos um tipo de plano.");
         }
 
         // Regra 3: Validações de campo
         if (convenio.getNome() == null || convenio.getNome().trim().isEmpty()) {
+            log.error("------------------ O nome do convênio é obrigatório. ------------------------------");
             throw new IllegalArgumentException("O nome do convênio é obrigatório.");
         }
 
         // Regra 4: Validações de campo status
         if (convenio.getStatusConvenio() == null ) {
-            throw new IllegalArgumentException("O nome do convênio é obrigatório.");
+            log.error("------------------ O Status do convênio é obrigatório. ------------------------------");
+            throw new IllegalArgumentException("O Status do convênio é obrigatório.");
         }
 
         // Regra 5: valida CNPJ
+        log.info("------------------ Validando o CNPJ.... ------------------------------");
         validateCnpj(convenio.getCnpj());
+
+
 
         // Regra 6: Verificar se o CNPJ já está em uso
         Optional<Convenio> existingConvenioByCnpj = convenioRepository.findByCnpj(convenio.getCnpj());
         if (existingConvenioByCnpj.isPresent()) {
+            log.error("------------------ Já existe um convênio com esse CNPJ. ------------------------------");
             throw new IllegalArgumentException("Já existe um convênio com esse CNPJ.");
         }
 
         // Regra 7: Verificar se o registro Ans do convênio já existe
         Optional<Convenio> existingRegistroAns = convenioRepository.findByRegistroAns(convenio.getRegistroAns());
         if (existingRegistroAns.isPresent()) {
+            log.error("------------------ Já existe um convênio com esse registro ans. ------------------------------");
             throw new IllegalArgumentException("Já existe um convênio com esse registro ans.");
         }
 
@@ -92,10 +100,12 @@ public class CreateConvenioUseCase {
 
     private void validateCnpj(String cnpj) {
         if (cnpj == null || cnpj.trim().isEmpty()) {
+            log.error("------------------ CNPJ é obrigatório. ------------------------------");
             throw new IllegalArgumentException("O CNPJ é obrigatório.");
         }
 
         if (!isValidCnpj(cnpj)) {
+            log.error("------------------ O CNPJ fornecido é inválido. ------------------------------");
             throw new IllegalArgumentException("O CNPJ fornecido é inválido.");
         }
     }
