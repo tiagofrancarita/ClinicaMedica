@@ -25,12 +25,9 @@ jobs:
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          destination_branch: develop
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
-          pr_body: |
-            Esta é uma solicitação pull automatizada de ${{ github.head_ref }} para ${{ env.DESTINATION_BRANCH }}.
-
-            Recent commits:
-            ${{ env.COMMIT_MESSAGES }}
-          pr_label: "feature, automated pr"
+            destination_branch: develop
+            pr_title: "Pull request ${{ github.head_ref }} into ${{ env.DESTINATION_BRANCH }}"
+            pr_body: "Automated pull request with the following commits:\n${{ steps.get-commit-messages.outputs.commit-messages }}"
+            pr_label: "feature, automated pr"
+            env:
+              GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
