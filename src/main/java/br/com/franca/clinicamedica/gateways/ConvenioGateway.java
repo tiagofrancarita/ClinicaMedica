@@ -12,4 +12,6 @@ public interface ConvenioGateway {
     Optional<Convenio> findById(Long id);
     Page<Convenio> findAll(Pageable pageable);
     void deleteById(Long id);
+
+    boolean existsById(Long id);
 }

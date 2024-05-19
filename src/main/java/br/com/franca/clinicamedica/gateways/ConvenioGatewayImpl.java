@@ -40,4 +40,9 @@ public class ConvenioGatewayImpl implements ConvenioGateway{
         convenioRepository.deleteById(id);
 
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return false;
+    }
 }
