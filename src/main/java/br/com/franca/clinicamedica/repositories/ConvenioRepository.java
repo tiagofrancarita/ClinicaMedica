@@ -21,5 +21,9 @@ public interface ConvenioRepository extends JpaRepository<Convenio, Long> {
 
     boolean existsByCnpjAndIdNot(String cnpj, Long id);
 
+    Optional<Convenio> findById(Long id);
+
+    boolean existsById(Long id);
+
 
 }

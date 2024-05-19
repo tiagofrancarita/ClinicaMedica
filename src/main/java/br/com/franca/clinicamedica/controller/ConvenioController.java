@@ -43,9 +43,10 @@ public class ConvenioController {
 
     @GetMapping("getConvenio/{id}")
     public ResponseEntity<Convenio> getConvenio(@PathVariable Long id) {
-        Optional<Convenio> convenio = getConvenioUseCase.getConvenio(id);
+        Optional<Convenio> convenio = getConvenioUseCase.execute(id);
         return convenio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @GetMapping("/listAllConvenios")
     public ResponseEntity<Page<ConvenioDTO>> listAllConvenios(
             @RequestParam(defaultValue = "0") int page,
@@ -72,9 +73,9 @@ public class ConvenioController {
         }
     }
 
-    @PutMapping("updateConvenio/{id}")
+    @PutMapping("/updateConvenio/{id}")
     public ResponseEntity<Convenio> updateConvenio(@PathVariable Long id, @RequestBody Convenio convenio) {
-        if (!getConvenioUseCase.getConvenio(id).isPresent()) {
+        if (!getConvenioUseCase.execute(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
         convenio.setId(id);
