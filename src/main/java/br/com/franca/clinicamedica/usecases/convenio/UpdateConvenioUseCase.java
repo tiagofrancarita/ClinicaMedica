@@ -34,11 +34,12 @@ public class UpdateConvenioUseCase {
 
         return convenioRepository.save(convenio);
     }
-    private void validateConvenio(Convenio convenio) {
-        if (convenio.getNome() == null || convenio.getNome().isEmpty()) {
-            throw new IllegalArgumentException("Nome do convênio é obrigatório.");
-        }
 
+    private void validateConvenio(Convenio convenio) {
+
+        if (convenio.getNome() == null || convenio.getNome().isEmpty()) {
+            throw new IllegalArgumentException("Nome do convênio não pode ser vazio.");
+        }
         if (convenio.getCnpj() == null || !isValidCnpj(convenio.getCnpj())) {
             throw new IllegalArgumentException("CNPJ inválido.");
         }

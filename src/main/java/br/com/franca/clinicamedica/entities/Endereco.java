@@ -52,13 +52,9 @@ public class Endereco implements Serializable {
     private Paciente paciente;
 
     @JsonIgnore
-    @ManyToOne(targetEntity = Medico.class)
-    @JoinColumn(name = "id_medico", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "medico_id_fk"))
-    private Medico medico;
+    @ManyToOne(targetEntity = Funcionario.class)
+    @JoinColumn(name = "id_funcionario", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "funcionario_id_fk"))
+    private Funcionario funcionario;
 
-    @JsonIgnore
-    @ManyToOne(targetEntity = Medico.class)
-    @JoinColumn(name = "id_enfermeiro", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "enfermeiro_id_fk"))
-    private Enfermeiro enfermeiro;
 
 }
